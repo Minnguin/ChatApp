@@ -1,0 +1,304 @@
+/* รีเซ็ตค่า margin/padding และกำหนดขนาดหน้าจอ */
+html, body {
+   height: 100%;
+   margin: 0;
+   font-family: 'Arial', sans-serif;
+   background-color: #f4f4f4;
+}
+
+/* โครงสร้างแอป */
+#chatapp {
+   display: flex;
+   height: 100vh;
+}
+
+/* ====== 🏠 Sidebar - ห้องแชท (Rooms) ====== */
+#rooms {
+   background-color: lightblue;
+   width: 25%;
+   padding: 15px;
+   border-right: 2px solid #ddd;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+/* หัวข้อห้อง */
+.room-title {
+   font-size: 22px;
+   font-weight: bold;
+   text-align: center;
+   padding: 10px;
+   background: rgba(255, 255, 255, 0.3);
+   border-radius: 10px;
+   width: 100%;
+}
+
+/* รายการห้อง */
+.room-list {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+}
+
+.room-item {
+   width: 90%;
+   background: white;
+   padding: 15px;
+   margin-bottom: 10px;
+   border-radius: 8px;
+   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease-in-out;
+   text-align: center;
+   cursor: pointer;
+}
+
+.room-item:hover {
+   background: #e9ecef;
+   transform: scale(1.05);
+}
+
+.room-link {
+   text-decoration: none;
+   color: #007bff;
+   font-size: 16px;
+   font-weight: bold;
+}
+
+.room-link:hover {
+   color: #0056b3;
+}
+
+/* ====== 💬 ส่วนข้อความ (Messages) ====== */
+#messages {
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   padding: 20px;
+   background-color: beige;
+}
+
+/* กล่องข้อความ */
+#message-list {
+   flex-grow: 1;
+   overflow-y: auto;
+   padding: 15px;
+   background: white;
+   border-radius: 10px;
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ข้อความแต่ละอัน */
+.chat-message {
+   display: flex;
+   align-items: flex-start;
+   margin-bottom: 15px;
+   padding: 10px;
+   border-radius: 10px;
+   max-width: 70%;
+   word-wrap: break-word;
+   position: relative;
+}
+
+/* ข้อความของตัวเอง */
+.chat-message.self {
+   align-self: flex-end;
+   background: lightblue;
+   color: black;
+   text-align: right;
+}
+
+/* ข้อความของคนอื่น */
+.chat-message.other {
+   align-self: flex-start;
+   background: #e9ecef;
+   color: black;
+}
+
+/* Avatar ของ User */
+.avatar {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   margin-right: 10px;
+}
+
+/* กล่องข้อความ */
+.message-bubble {
+   padding: 12px;
+   border-radius: 10px;
+   max-width: 100%;
+   display: inline-block;
+   font-size: 16px;
+}
+
+/* เวลา */
+.message-bubble small {
+   display: block;
+   font-size: 12px;
+   color: rgba(0, 0, 0, 0.6);
+   margin-top: 5px;
+}
+
+/* ฟอร์มส่งข้อความ */
+.message-form {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 10px;
+   align-items: center;
+}
+
+/* กล่องใส่ข้อความและปุ่ม */
+.input-container {
+   display: flex;
+   gap: 10px;
+   width: 100%;
+}
+
+/* ช่องป้อนข้อความ */
+#message-input, #room-id-input {
+   flex: 1;
+   padding: 12px 15px;
+   border: 2px solid lightblue;
+   border-radius: 8px;
+   font-size: 16px;
+   outline: none;
+   transition: 0.3s;
+   text-align: center;
+   width: 50%;
+}
+
+#message-input:focus, #room-id-input:focus {
+   border-color: #0056b3;
+   box-shadow: 0px 0px 8px rgba(0, 91, 187, 0.3);
+}
+
+/* ปุ่มส่งข้อความ */
+.btn-submit {
+   background-color: lightblue;
+   color: black;
+   border: none;
+   padding: 12px 18px;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: 0.3s;
+   font-size: 16px;
+   font-weight: bold;
+   min-width: 100px;
+   height: 46px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.btn-submit:hover {
+   background-color: #5faad9;
+   transform: scale(1.05);
+}
+
+/* ข้อความแจ้งข้อผิดพลาด */
+.error-messages {
+   color: red;
+   padding: 10px;
+   background: #ffe6e6;
+   border: 1px solid red;
+   border-radius: 8px;
+}
+/* ฟอร์มสร้างห้อง */
+.room-form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+   padding: 10px;
+}
+
+/* กล่องใส่ชื่อห้องและปุ่ม */
+.room-form .input-container {
+   display: flex;
+   gap: 10px;
+   width: 100%;
+   justify-content: center;
+}
+
+/* ช่องป้อนชื่อห้อง */
+.room-form .form-input {
+   flex: 1;
+   padding: 12px 15px;
+   border: 2px solid lightblue;
+   border-radius: 8px;
+   font-size: 16px;
+   outline: none;
+   transition: 0.3s;
+   text-align: center;
+}
+
+.room-form .form-input:focus {
+   border-color: #0056b3;
+   box-shadow: 0px 0px 8px rgba(0, 91, 187, 0.3);
+}
+
+/* ฟอร์มสร้างห้อง */
+.room-form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+   background: lightblue;
+   padding: 20px;
+   border-radius: 10px;
+   margin-top: 15px;
+   gap: 10px; /* เพิ่มช่องว่างระหว่าง input และปุ่ม */
+}
+
+/* ช่องใส่ชื่อห้อง */
+.room-form .form-input {
+   width: 100%;
+   padding: 12px;
+   border: 2px solid #007bff;
+   border-radius: 8px;
+   font-size: 16px;
+   outline: none;
+   transition: 0.3s;
+   text-align: center;
+}
+
+/* ปุ่มสร้างห้อง */
+.room-form .btn-submit {
+   width: 100%; /* ให้ปุ่มกว้างเท่าช่อง input */
+   padding: 12px;
+   background-color: lightblue;
+   color: black;
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: 0.3s;
+   font-size: 16px;
+   font-weight: bold;
+   text-align: center;
+}
+
+.room-form .btn-submit:hover {
+   background-color: #5faad9;
+   transform: scale(1.05);
+}
+
+
+/* ====== 📱 Responsive Design ====== */
+@media screen and (max-width: 768px) {
+   #chatapp {
+      flex-direction: column;
+   }
+
+   #rooms {
+      width: 100%;
+      border-right: none;
+      border-bottom: 2px solid #ddd;
+   }
+
+   #messages {
+      width: 100%;
+   }
+}

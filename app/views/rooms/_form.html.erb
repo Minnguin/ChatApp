@@ -1,0 +1,6 @@
+<%= form_with(model: room, local: true, class: "room-form") do |f| %>
+  <div class="input-container">
+    <%= f.text_field :name, class: "form-input", placeholder: "Enter room name" %>
+  </div>
+  <%= f.submit "Create Room", class: "btn-submit" %>
+<% end %>

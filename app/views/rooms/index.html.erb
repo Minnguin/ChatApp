@@ -1,0 +1,29 @@
+<div id='chatapp'>
+  <div id='rooms'>
+    <h1 class="room-title">Chat Rooms</h1>
+    <div id='room-list'>
+      <% @rooms.each do |room| %>
+        <div class="room-item">
+          <h2 class="room-name"><%= link_to room.name, room_path(room), class: "room-link" %></h2>
+        </div>
+      <% end %>
+    </div>
+    <%= render partial: 'form', locals: { room: Room.new(name: "Room #{Room.count + 1}") } %>
+  </div>
+
+  <div id='messages'>
+    <% if @room %>  
+      <%= turbo_frame_tag "room-messages-#{@room.id}" do %>
+        <div id='message-list'>
+          <% @messages.each do |message| %>
+            <%= render message %>
+          <% end %>
+        </div>
+        <%= render partial: 'messages/form', locals: { message: Message.new(room: @room) } %>
+        <%= turbo_stream_from @room %>
+      <% end %>
+    <% else %>
+      <p class="no-room-selected">No room selected.</p>
+    <% end %>
+  </div>
+</div>

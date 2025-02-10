@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Messages" %>
+
+<h1>Messages</h1>
+
+<div id="messages" class="chat-container">
+  <% if @room %>  
+    <%= turbo_frame_tag "room-messages-#{@room.id}" do %>
+      <div id="message-list">
+        <% @messages.each do |message| %>
+          <div class="chat-message <%= message.user == current_user ? 'self' : 'other' %>">
+            <img src="<%= message.user.avatar_url || 'default-avatar.png' %>" class="avatar">
+            <div class="message-bubble">
+              <p><%= message.content %></p>
+              <small><%= time_ago_in_words(message.created_at) %> ago</small>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <%= render partial: 'messages/form', locals: { message: Message.new(room: @room) } %>
+      <%= turbo_stream_from @room %>
+    <% end %>
+  <% else %>
+    <p>No room selected.</p>
+  <% end %>
+</div>
+

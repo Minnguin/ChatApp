@@ -1,0 +1,2 @@
+<%= turbo_stream.append "room-list", partial: "room", object: @room %>
+<%= turbo_stream.replace "actions", partial: "form", locals: {room:Room.new(name: "Room #{Room.count + 1}")} %>
